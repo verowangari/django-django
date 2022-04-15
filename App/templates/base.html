@@ -7,10 +7,128 @@
     {% block styles %}
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> 
+  <!-- bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">  
+  
     {% endblock %}
     <title>Hi neighbor!</title>
 </head>
 <body>
+    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="#">
+            <img src="#" >
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a href="{% url 'index' %}" class="navbar-item">
+              Home
+            </a>
+      
+            <a class="navbar-item">
+              Contact
+            </a>
+            <a href="{% url 'profile' %}" class="navbar-item">
+                <i class="material-icons">face</i>
+                Profile - <strong>{{ request.user }}</strong>
+              </a>
+      
+              
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="#" class="navbar-item">
+                  <i style="color: green;" class="material-icons">perm_media</i>
+                  <strong>New Post</strong>
+                </a>
+
+                <form class="d-flex" method="POST" action="#">
+                    <div class="field has-addons has-addons-centered">
+                    {% csrf_token%}
+          
+                     <div class="control">
+                     <input class="input" name="searched" type="Search" placeholder="Search for a user"> </div>
+                     <div class="control">
+                     <button class="button is-primary" type="submit">Search</button> </div>
+                
+                    </div>
+                   </form> <br>
+                   <a href="{% url 'signup' %}" class="button is-dark">
+                    Sign Up
+                  </a> <br>
+
+                   
+                   <a href="{% url 'logout' %}" class="button is-light">
+                    Log Out
+                  </a>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </nav> -->
+
+  <nav>
+    <div class="nav-wrapper">
+      
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{% url 'index' %}" >
+            Home
+          </a></li>
+        <li><a href="{% url 'profile' %}" >
+            <i class="material-icons">face</i>
+            Profile -{{ request.user }}
+          </a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+      
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><form class="d-flex" method="POST" action="#">
+            <div class="field has-addons has-addons-centered">
+            {% csrf_token%}
+  
+             <div class="control">
+             <input class="input" name="searched" type="Search" placeholder="Search for a user"> </div>
+             <div class="control">
+             <button class="button is-light" type="submit">Search</button> </div>
+        
+            </div>
+           </form></li>
+        <li> <a href="#" >
+            <i  class="material-icons">perm_media</i>
+            <strong>New Post</strong>
+          </a></li>
+        <li><a href="{% url 'signup' %}" class="button is-dark">
+            Sign Up
+          </a> <br></li>
+        <li><a href="{% url 'logout' %}" class="button is-light">
+            Log Out
+          </a></li>
+      </ul>
+    </div>
+  </nav>
     {% block content %}
 
      {% endblock %}

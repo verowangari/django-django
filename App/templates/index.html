@@ -1,1 +1,53 @@
-<h1>Time to test this </h1>
+
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    
+
+    </head>
+   
+    
+   
+<body >
+  
+   
+
+    <div class="col-md-9">
+        <div class="row">
+        {% for post_item in post_items %}
+        
+        <div class="col-md-4">
+            <div class="card my-2 " width="18px" >
+                <img src="{{post_item.picture.url}}" class="image-thumbail" alt="...">
+                
+                <div class="card-body">
+                    <strong><small >Title:{{post_item.title}}</small> <br></strong>
+                    <small > <em><strong>Description:</strong> {{post_item.post}} </em></small> <br>
+                    <small > <em><strong>Neighborhood:</strong> {{post_item.hood}} </em></small> <br>
+                  <small ><strong>Date:</strong>{{post_item.date}}</small> <br/>
+                  <small ><strong>By:</strong>{{post_item.user}}</small> <br/>
+                  
+                  
+                  
+                  
+                </div>
+                
+              </div>
+        </div>
+        {% empty %}
+        <h3>No Photos... </h3>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+   
+
+</body>
+</html>
+{% endblock %}

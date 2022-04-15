@@ -7,7 +7,9 @@
         <div class="media-body">
           <h2 class="account-heading">@ {{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
-          <p class="text-secondary">{{ user.bio }}</p>
+          <p class="text-secondary">Location:{{ user.profile.location }}</p>
+          <p class="text-secondary">{{ user.profile.bio }}</p>
+        
         </div>
     </div>
     </figure>
