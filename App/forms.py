@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile,Post,NeighbourHood,Business
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -65,10 +65,10 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['name','image','location','bio']
 
 
-# class NewPostForm(forms.ModelForm):
-#     class Meta:
-#         model = Post
-#         fields = ['title','description','picture','projecturl']	
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','post','picture','hood','user']	
         
 # class RateForm(forms.ModelForm):
 #     # text = forms.CharField(widget=forms.Textarea())
@@ -78,3 +78,13 @@ class ProfileUpdateForm(forms.ModelForm):
 #         model = Revieww
 #         fields = ['text','design','usability','content']
         
+class NeighbourHoodForm(forms.ModelForm):
+    class Meta:
+        model = NeighbourHood
+        fields=['name','location','hood_logo','description','health_tell','police_number']
+        
+        
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ('user', 'neighbourhood')

@@ -1,11 +1,11 @@
-from django.shortcuts import render,redirect
-from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm
+from django.shortcuts import render,redirect, get_object_or_404
+from .forms import SignupForm,UserUpdateForm, ProfileUpdateForm,NewPostForm,NeighbourHoodForm,BusinessForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Post
+from .models import Post,NeighbourHood,Business
 # Create your views here.
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def index(request):
     post_items = Post.objects.all()
     return render(request, 'index.html', {"post_items": post_items})
@@ -68,3 +68,63 @@ def NewPost(request):
     else:
         form = NewPostForm()
     return render(request, 'newpost.html',{'form':form})
+
+def CreateHood(request):
+    if request.method == 'POST':
+        form = NeighbourHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save()
+            return redirect('allhoods')
+    else:
+        form = NeighbourHoodForm()
+    return render(request, 'newhood.html', {'form': form})
+
+def hoods(request):
+    all_hoods = NeighbourHood.objects.all()
+    all_hoods = all_hoods[::-1]
+    context = {
+        'all_hoods': all_hoods,
+    }
+    return render(request, 'allhoods.html', context)
+
+def join_hood(request, id):
+    neighbourhood = get_object_or_404(NeighbourHood, id=id)
+    request.user.profile.neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('allhoods')
+
+
+def leave_hood(request, id):
+    hood = get_object_or_404(NeighbourHood, id=id)
+    request.user.profile.neighbourhood = None
+    request.user.profile.save()
+    return redirect('allhoods')
+
+def SingleHood(request, hood_id):
+    hood = NeighbourHood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighbourhood=hood)
+    posts = Post.objects.filter(hood=hood)
+    posts = posts[::-1]
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            b_form = form.save(commit=False)
+            b_form.neighbourhood = hood
+            b_form.user = request.user.profile
+            b_form.save()
+            return redirect('single-hood', hood.id)
+    else:
+        form = BusinessForm()
+    params = {
+        'hood': hood,
+        'business': business,
+        'form': form,
+        'posts': posts
+    }
+    return render(request, 'singlehood.html', params)
+
+# def SingleHood(request):
+    
+#     return render(request, 'singlehood.html')

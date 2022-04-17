@@ -100,7 +100,30 @@
             <i class="material-icons">face</i>
             Profile -{{ request.user }}
           </a></li>
+          {% if user.profile.neighbourhood %}
+        <li class="mb-4">
+            <a href="{% url 'singlehood' user.profile.neighbourhood.id %}">
+                <i class="fas fa-paper-plane"></i>&nbsp;
+                &nbsp;{{user.profile.neighbourhood.name}}
+            </a>
+        </li>
+        {% else %}
+        <li class="mb-4">
+            <a href=""> &nbsp;
+                No Hood Yet
+            </a>
+        </li>
+        {% endif %}
         <li><a href="collapsible.html">JavaScript</a></li>
+        <li><a href="{% url 'allhoods' %}" class="button is-dark">
+            
+          All Hoods
+        </a></li> 
+
+        <li><a href="{% url 'newhood' %}" class="button is-light">
+            
+            New Hood
+          </a></li>
       </ul>
       
       
@@ -116,7 +139,7 @@
         
             </div>
            </form></li>
-        <li> <a href="#" >
+        <li> <a href="{% url 'newpost' %}" >
             <i  class="material-icons">perm_media</i>
             <strong>New Post</strong>
           </a></li>
@@ -126,6 +149,7 @@
         <li><a href="{% url 'logout' %}" class="button is-light">
             Log Out
           </a></li>
+          
       </ul>
     </div>
   </nav>

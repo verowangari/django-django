@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'tryneighbor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tryneighbor',
+        'NAME': 'newneighbor',
         'USER': 'moringa',
         'PASSWORD':'Access',
     }
 }
-
+# tryneighbor
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
